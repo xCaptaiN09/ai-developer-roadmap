@@ -8,7 +8,7 @@ Path: AI Application Developer (Path A) + Deployment basics.
 
 ## View Roadmap
 
-Open `index.html` in your browser or visit the live site.
+→ [xcaptain09.github.io/ai-developer-roadmap](https://xcaptain09.github.io/ai-developer-roadmap)
 
 ## Stack Covered
 
