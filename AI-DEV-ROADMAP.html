@@ -1,0 +1,947 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Muhammed Dilshad A — AI Developer Roadmap</title>
+<style>
+  /* No external font dependencies — system fonts only */
+</style>
+<style>
+  :root {
+    --bg: #0a0a0a;
+    --surface: #111111;
+    --border: #1e1e1e;
+    --accent: #e8ff47;
+    --accent2: #47c4ff;
+    --accent3: #ff6b47;
+    --text: #f0f0f0;
+    --muted: #666;
+    --phase1: #e8ff47;
+    --phase2: #47c4ff;
+    --phase3: #b47fff;
+    --phase4: #ff9f47;
+    --phase5: #47ffb4;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Grid background */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(232,255,71,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(232,255,71,0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 60px 24px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Header */
+  .header {
+    margin-bottom: 64px;
+  }
+
+  .header-tag {
+    font-family: 'Courier New', 'Lucida Console', monospace;
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    opacity: 1;
+    animation: fadeUp 0.4s ease forwards;
+  }
+
+  .header h1 {
+    font-family: 'Arial Black', 'Impact', 'Franklin Gothic Heavy', sans-serif;
+    font-size: clamp(36px, 7vw, 72px);
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -0.03em;
+    margin-bottom: 16px;
+    opacity: 1;
+    animation: fadeUp 0.4s ease forwards;
+  }
+
+  .header h1 span {
+    color: var(--accent);
+  }
+
+  .header-sub {
+    font-size: 15px;
+    color: var(--muted);
+    font-family: 'Courier New', 'Lucida Console', monospace;
+    opacity: 1;
+    animation: fadeUp 0.4s ease forwards;
+  }
+
+  /* Stats bar */
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    margin-bottom: 64px;
+    opacity: 1;
+    animation: fadeUp 0.4s ease forwards;
+  }
+
+  .stat:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+  }
+
+  .stat {
+    background: var(--surface);
+    padding: 20px 24px;
+  }
+
+  .stat-label {
+    font-family: 'Courier New', 'Lucida Console', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    margin-bottom: 6px;
+  }
+
+  .stat-value {
+    font-family: 'Arial Black', 'Impact', 'Franklin Gothic Heavy', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--accent);
+  }
+
+  /* Section label */
+  .section-label {
+    font-family: 'Courier New', 'Lucida Console', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    margin-bottom: 24px;
+  }
+
+  /* Goal card */
+  .goal-card {
+    border: 1px solid var(--accent);
+    background: rgba(232,255,71,0.04);
+    padding: 28px 32px;
+    margin-bottom: 64px;
+    position: relative;
+    opacity: 1;
+    animation: fadeUp 0.4s ease forwards;
+  }
+
+  .goal-card::before {
+    content: '★';
+    position: absolute;
+    top: -12px;
+    left: 24px;
+    background: var(--bg);
+    padding: 0 8px;
+    color: var(--accent);
+    font-size: 14px;
+  }
+
+  .goal-card p {
+    font-size: 15px;
+    line-height: 1.7;
+    color: #ccc;
+  }
+
+  .goal-card strong {
+    color: var(--accent);
+    font-weight: 600;
+  }
+
+  /* Phase */
+  .phase {
+    margin-bottom: 48px;
+    opacity: 1;
+    animation: fadeUp 0.6s ease forwards;
+  }
+
+  .phase:nth-child(1) { animation-delay: 0.1s; }
+  .phase:nth-child(2) { animation-delay: 0.15s; }
+  .phase:nth-child(3) { animation-delay: 0.2s; }
+  .phase:nth-child(4) { animation-delay: 0.25s; }
+  .phase:nth-child(5) { animation-delay: 0.3s; }
+  .phase:nth-child(6) { animation-delay: 0.35s; }
+
+  .phase-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    margin-bottom: 24px;
+  }
+
+  .phase-num {
+    font-family: 'Courier New', 'Lucida Console', monospace;
+    font-size: 11px;
+    color: var(--bg);
+    background: var(--phase-color, var(--accent));
+    padding: 4px 10px;
+    font-weight: 500;
+    white-space: nowrap;
+    margin-top: 4px;
+    flex-shrink: 0;
+  }
+
+  .phase-title-block {}
+
+  .phase-title {
+    font-family: 'Arial Black', 'Impact', 'Franklin Gothic Heavy', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+
+  .phase-meta {
+    font-family: 'Courier New', 'Lucida Console', monospace;
+    font-size: 11px;
+    color: var(--muted);
+  }
+
+  .phase-meta span {
+    color: var(--phase-color, var(--accent));
+  }
+
+  .phase-body {
+    border-left: 1px solid var(--border);
+    margin-left: 0;
+    padding-left: 24px;
+  }
+
+  /* Track */
+  .track {
+    margin-bottom: 20px;
+    padding: 20px 24px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    position: relative;
+  }
+
+  .track::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: var(--phase-color, var(--accent));
+  }
+
+  .track-name {
+    font-family: 'Arial Black', 'Impact', 'Franklin Gothic Heavy', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: var(--text);
+  }
+
+  .track-items {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .track-items li {
+    font-size: 13px;
+    color: #aaa;
+    font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+    display: block;
+    line-height: 1.6;
+    padding-left: 18px;
+    position: relative;
+  }
+
+  .track-items li::before {
+    content: '→';
+    color: var(--phase-color, var(--accent));
+    font-size: 11px;
+    position: absolute;
+    left: 0;
+    top: 2px;
+  }
+
+  .track-items li strong {
+    color: var(--text);
+    font-weight: 600;
+  }
+
+  .track-items li em {
+    font-style: normal;
+    color: var(--muted);
+    font-family: 'Courier New', 'Lucida Console', monospace;
+    font-size: 11px;
+    word-break: break-word;
+  }
+
+  .outcome {
+    margin-top: 16px;
+    padding: 12px 16px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid var(--border);
+    font-size: 12px;
+    font-family: 'Courier New', 'Lucida Console', monospace;
+    color: var(--muted);
+  }
+
+  .outcome strong {
+    color: var(--phase-color, var(--accent));
+  }
+
+  /* Certificate section */
+  .cert-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  @media (max-width: 600px) {
+    .cert-grid { grid-template-columns: 1fr; }
+  }
+
+  .cert-card {
+    padding: 16px 20px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+  }
+
+  .cert-card.worth {
+    border-color: rgba(71,196,255,0.3);
+  }
+
+  .cert-card.skip {
+    border-color: rgba(255,107,71,0.2);
+    opacity: 0.7;
+  }
+
+  .cert-tag {
+    font-family: 'Courier New', 'Lucida Console', monospace;
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    margin-bottom: 10px;
+    padding: 3px 8px;
+    display: inline-block;
+  }
+
+  .cert-tag.worth { background: rgba(71,196,255,0.15); color: var(--accent2); }
+  .cert-tag.free { background: rgba(71,255,180,0.15); color: var(--phase5); }
+  .cert-tag.skip { background: rgba(255,107,71,0.15); color: var(--accent3); }
+
+  .cert-name {
+    font-family: 'Arial Black', 'Impact', 'Franklin Gothic Heavy', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+
+  .cert-note {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  /* Rules */
+  .rules {
+    margin-top: 64px;
+    border: 1px solid var(--border);
+    overflow: hidden;
+    opacity: 1;
+    animation: fadeUp 0.4s ease forwards;
+  }
+
+  .rules-header {
+    background: var(--accent);
+    padding: 14px 24px;
+    font-family: 'Arial Black', 'Impact', 'Franklin Gothic Heavy', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--bg);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .rules-list {
+    list-style: none;
+  }
+
+  .rules-list li {
+    padding: 14px 24px;
+    border-bottom: 1px solid var(--border);
+    font-size: 13px;
+    color: #bbb;
+    display: flex;
+    gap: 12px;
+    align-items: baseline;
+    line-height: 1.5;
+  }
+
+  .rules-list li:last-child { border-bottom: none; }
+
+  .rule-num {
+    font-family: 'Courier New', 'Lucida Console', monospace;
+    font-size: 10px;
+    color: var(--accent);
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  /* Timeline */
+  .timeline {
+    margin: 64px 0;
+    opacity: 1;
+    animation: fadeUp 0.4s ease forwards;
+  }
+
+  .tl-row {
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    gap: 0;
+    margin-bottom: 0;
+  }
+
+  .tl-time {
+    font-family: 'Courier New', 'Lucida Console', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    padding: 14px 0;
+    border-right: 1px solid var(--border);
+    padding-right: 20px;
+    text-align: right;
+  }
+
+  .tl-content {
+    padding: 14px 0 14px 20px;
+    border-bottom: 1px solid var(--border);
+    font-size: 13px;
+    color: #ccc;
+  }
+
+  .tl-content strong {
+    color: var(--text);
+    font-weight: 600;
+    display: block;
+    margin-bottom: 2px;
+    font-family: 'Arial Black', 'Impact', 'Franklin Gothic Heavy', sans-serif;
+    font-size: 14px;
+  }
+
+  .tl-dot {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+    margin-right: 8px;
+    position: relative;
+    top: -1px;
+  }
+
+  /* Footer */
+  .footer {
+    margin-top: 80px;
+    padding-top: 32px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    opacity: 1;
+    animation: fadeUp 0.4s ease forwards;
+  }
+
+  .footer-left {
+    font-family: 'Courier New', 'Lucida Console', monospace;
+    font-size: 11px;
+    color: var(--muted);
+  }
+
+  .footer-right {
+    font-family: 'Arial Black', 'Impact', 'Franklin Gothic Heavy', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--accent);
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Phase color overrides */
+  .p0 { --phase-color: #aaa; }
+  .p1 { --phase-color: var(--phase1); }
+  .p2 { --phase-color: var(--phase2); }
+  .p3 { --phase-color: var(--phase3); }
+  .p4 { --phase-color: var(--phase4); }
+  .p5 { --phase-color: var(--phase5); }
+
+  .phases-section { margin-bottom: 64px; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="header-tag">// AI Application Developer Roadmap — MUHAMMED DILSHAD A</div>
+    <h1>Job-Ready<br>by <span>2027.</span></h1>
+    <div class="header-sub">Path A + Deployment · Tier-2 College · No Heavy Math · Portfolio-First</div>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <div class="stat-label">Total Duration</div>
+      <div class="stat-value">22 months</div>
+    </div>
+    <div class="stat">
+      <div class="stat-label">Daily Time</div>
+      <div class="stat-value">~12 hrs/wk</div>
+    </div>
+    <div class="stat">
+      <div class="stat-label">Target Salary</div>
+      <div class="stat-value">₹12–20 LPA</div>
+    </div>
+    <div class="stat">
+      <div class="stat-label">Graduation</div>
+      <div class="stat-value">Mar 2028</div>
+    </div>
+    <div class="stat">
+      <div class="stat-label">Primary Weapon</div>
+      <div class="stat-value">Portfolio</div>
+    </div>
+  </div>
+
+  <!-- Goal -->
+  <div class="goal-card">
+    <p>You are building <strong>AI-powered products</strong> — apps where users interact with AI you've assembled from existing models. Think: upload a PDF and ask questions, a smart chatbot for a business, an AI tool that automates a task. You don't need to build the AI brain. You use it as a component and build the product around it. <strong>No heavy math required.</strong> This is <strong>Path A (AI App Developer)</strong> as primary, with just enough deployment skills (Docker + GCP) to ship your projects live. A product that only runs on your laptop is not a product. GitHub portfolio + deployed projects = your degree replacement.</p>
+  </div>
+
+  <!-- Phases -->
+  <div class="phases-section">
+    <div class="section-label">// Phases — follow in order</div>
+
+    <!-- Phase 0 -->
+    <div class="phase p0">
+      <div class="phase-header">
+        <div class="phase-num" style="background:#555;color:#fff">PHASE 0</div>
+        <div class="phase-title-block">
+          <div class="phase-title">Foundation</div>
+          <div class="phase-meta">Now → May 2025 &nbsp;·&nbsp; <span>~2 months</span> &nbsp;·&nbsp; 4th Sem parallel</div>
+        </div>
+      </div>
+      <div class="phase-body">
+        <div class="track">
+          <div class="track-name">Python — Intermediate</div>
+          <ul class="track-items">
+            <li><strong>100 Days of Code: The Complete Python Pro Bootcamp — Dr. Angela Yu</strong> <em>— Udemy — ~₹499 on sale — 4–6 weeks</em></li>
+            <li>Link: <em>udemy.com</em> → search "100 Days of Code Angela Yu"</li>
+            <li>Project-based. You build something every day. Modern, clean, industry-style Python.</li>
+            <li>After completing → do <strong>Kaggle Python Certificate</strong> at <em>kaggle.com/learn/python</em> — free, credible</li>
+          </ul>
+        </div>
+        <div class="track">
+          <div class="track-name">SQL Basics</div>
+          <ul class="track-items">
+            <li><strong>CS50's Introduction to Databases with SQL</strong> <em>— Harvard — completely free — certificate included — 2 weeks</em></li>
+            <li>Link: <em>cs50.harvard.edu/sql</em></li>
+            <li>Harvard certificate. Highly credible for college and recruiters.</li>
+          </ul>
+        </div>
+        <div class="track">
+          <div class="track-name">Git + GitHub</div>
+          <ul class="track-items">
+            <li><strong>Git and GitHub for Beginners — freeCodeCamp</strong> <em>— YouTube — free — 1 hour — 1 week</em></li>
+            <li>Search on YouTube: "Git and GitHub for Beginners freeCodeCamp"</li>
+            <li>No certificate needed. Your GitHub commit history IS the proof.</li>
+            <li>Start pushing every script from day one. Even small ones.</li>
+          </ul>
+        </div>
+        <div class="outcome"><strong>Outcome:</strong> You stop being a beginner. Every phase after this becomes learnable.</div>
+      </div>
+    </div>
+
+    <!-- Phase 1 -->
+    <div class="phase p1">
+      <div class="phase-header">
+        <div class="phase-num">PHASE 1</div>
+        <div class="phase-title-block">
+          <div class="phase-title">DSA — Interview Survival</div>
+          <div class="phase-meta">June 2025 → Nov 2025 &nbsp;·&nbsp; <span>~6 months</span> &nbsp;·&nbsp; 5th Sem parallel</div>
+        </div>
+      </div>
+      <div class="phase-body">
+        <div class="track">
+          <div class="track-name">Strategy — Do NOT rush this</div>
+          <ul class="track-items">
+            <li><strong>Month 1–2:</strong> Arrays, strings, hashmaps — Easy problems only (NeetCode 150)</li>
+            <li><strong>Month 3–4:</strong> Sliding window, two pointers, binary search, linked lists</li>
+            <li><strong>Month 5–6:</strong> Trees, recursion, basic dynamic programming, graphs intro</li>
+            <li>Target: <strong>80–100 Easy + 40–50 Medium</strong> by end. Not 100 Mediums cold.</li>
+            <li>1 problem on college days, 2–3 on Sundays. Python only.</li>
+          </ul>
+        </div>
+        <div class="track">
+          <div class="track-name">Resource</div>
+          <ul class="track-items">
+            <li><strong>NeetCode.io Roadmap</strong> <em>— free — primary resource</em></li>
+            <li>Link: <em>neetcode.io</em> — roadmap + video explanations for every problem</li>
+            <li>YouTube: <em>youtube.com/@NeetCode</em> — watch his explanation when stuck</li>
+            <li><strong>LeetCode</strong> — practice platform — <em>leetcode.com</em> — free tier is enough</li>
+          </ul>
+        </div>
+        <div class="outcome"><strong>Outcome:</strong> You pass screening rounds. DSA is the filter most students fail at.</div>
+      </div>
+    </div>
+
+    <!-- Phase 2 -->
+    <div class="phase p2">
+      <div class="phase-header">
+        <div class="phase-num" style="background:var(--accent2)">PHASE 2</div>
+        <div class="phase-title-block">
+          <div class="phase-title">Applied GenAI — Core Skill</div>
+          <div class="phase-meta">Aug 2025 → Nov 2025 &nbsp;·&nbsp; <span>~3 months</span> &nbsp;·&nbsp; Runs parallel with Phase 1</div>
+        </div>
+      </div>
+      <div class="phase-body">
+        <div class="track">
+          <div class="track-name">FastAPI</div>
+          <ul class="track-items">
+            <li><strong>FastAPI Course for Beginners — freeCodeCamp</strong> <em>— YouTube — free — 2–3 weeks</em></li>
+            <li>Search on YouTube: "FastAPI Course for Beginners freeCodeCamp"</li>
+            <li>Official docs for reference: <em>fastapi.tiangolo.com</em></li>
+            <li>Build one small project: a working REST API with endpoints</li>
+          </ul>
+        </div>
+        <div class="track">
+          <div class="track-name">LLMs + Prompting</div>
+          <ul class="track-items">
+            <li><strong>ChatGPT Prompt Engineering for Developers</strong> <em>— DeepLearning.AI — free — certificate — 1 week</em></li>
+            <li>Link: <em>deeplearning.ai/short-courses</em></li>
+            <li>Understand how to talk to LLMs programmatically, not just in chat</li>
+          </ul>
+        </div>
+        <div class="track">
+          <div class="track-name">RAG Systems</div>
+          <ul class="track-items">
+            <li><strong>LangChain for LLM Application Development</strong> <em>— DeepLearning.AI — free — certificate — 3–4 weeks</em></li>
+            <li>Link: <em>deeplearning.ai/short-courses</em> — use this, NOT old Udemy courses</li>
+            <li>LangChain official docs for reference: <em>python.langchain.com</em></li>
+            <li><strong>LlamaIndex Course</strong> <em>— free — certificate — 1–2 weeks</em></li>
+            <li>Link: <em>docs.llamaindex.ai</em></li>
+          </ul>
+        </div>
+        <div class="track">
+          <div class="track-name">Vector Databases</div>
+          <ul class="track-items">
+            <li><strong>FAISS</strong> <em>— official docs + hands-on — 1 week</em> — <em>faiss.ai</em></li>
+            <li><strong>Pinecone Academy</strong> <em>— free — certificate — 1 week</em> — <em>docs.pinecone.io</em></li>
+          </ul>
+        </div>
+        <div class="track">
+          <div class="track-name">Local LLMs</div>
+          <ul class="track-items">
+            <li><strong>Ollama</strong> <em>— hands-on — 1 week</em> — <em>ollama.com</em></li>
+            <li>Run Mistral or Llama3 locally on your laptop. 16GB RAM handles it.</li>
+            <li>No course needed. Just install and experiment.</li>
+          </ul>
+        </div>
+        <div class="outcome"><strong>Outcome:</strong> You can build real RAG applications end-to-end. This is your primary job skill.</div>
+      </div>
+    </div>
+
+    <!-- Phase 3 -->
+    <div class="phase p3">
+      <div class="phase-header">
+        <div class="phase-num" style="background:var(--phase3)">PHASE 3</div>
+        <div class="phase-title-block">
+          <div class="phase-title">ML Theory + PyTorch — Just Enough</div>
+          <div class="phase-meta">Dec 2025 → Feb 2026 &nbsp;·&nbsp; <span>~3 months</span> &nbsp;·&nbsp; 6th Sem</div>
+        </div>
+      </div>
+      <div class="phase-body">
+        <div class="track">
+          <div class="track-name">PyTorch First — then Theory</div>
+          <ul class="track-items">
+            <li><strong>PyTorch Fundamentals</strong> <em>— DeepLearning.AI — free — certificate — 2–3 weeks</em></li>
+            <li>Link: <em>deeplearning.ai/short-courses</em></li>
+            <li>Do this BEFORE Andrew Ng. Learn the tool first, then the theory.</li>
+            <li><strong>Machine Learning Specialization — Andrew Ng</strong> <em>— Coursera — certificate — 8 weeks</em></li>
+            <li>Link: <em>coursera.org</em> → search "Machine Learning Specialization Andrew Ng"</li>
+            <li>Apply for financial aid on Coursera — almost always approved — makes it free</li>
+          </ul>
+        </div>
+        <div class="track">
+          <div class="track-name">Math Rule</div>
+          <ul class="track-items">
+            <li>Understand what gradient descent <em>does</em> — not the full derivation</li>
+            <li>Understand backprop intuitively — not mathematically</li>
+            <li>That's enough. You're a builder, not a researcher.</li>
+          </ul>
+        </div>
+        <div class="outcome"><strong>Outcome:</strong> You understand models well enough to debug and improve them. You can talk intelligently in interviews about how AI works.</div>
+      </div>
+    </div>
+
+    <!-- Phase 4 -->
+    <div class="phase p4">
+      <div class="phase-header">
+        <div class="phase-num" style="background:var(--phase4);color:#000">PHASE 4</div>
+        <div class="phase-title-block">
+          <div class="phase-title">Deployment — Make It Real</div>
+          <div class="phase-meta">Mar 2026 → Jun 2026 &nbsp;·&nbsp; <span>~3 months</span> &nbsp;·&nbsp; 6th–7th Sem</div>
+        </div>
+      </div>
+      <div class="phase-body">
+        <div class="track">
+          <div class="track-name">Docker (mandatory) — This is Path A deployment, not pure Path B</div>
+          <ul class="track-items">
+            <li><strong>Docker and Kubernetes: The Complete Guide — Stephen Grider</strong> <em>— Udemy — ~₹499 on sale — certificate — 3–4 weeks</em></li>
+            <li>Link: <em>udemy.com</em> → search "Docker and Kubernetes Complete Guide Stephen Grider"</li>
+            <li>Do Docker section first. Kubernetes later if time permits.</li>
+            <li>Containerize every project you build from here on.</li>
+          </ul>
+        </div>
+        <div class="track">
+          <div class="track-name">Cloud — GCP Vertex AI (not AWS)</div>
+          <ul class="track-items">
+            <li><strong>Google Cloud Skills Boost</strong> <em>— free + paid — Google badges + certificate — 4–6 weeks</em></li>
+            <li>Link: <em>cloudskillsboost.google</em></li>
+            <li>After completing → attempt <strong>GCP Associate Cloud Engineer exam</strong> — real Google certificate, strong in India</li>
+            <li>GCP over AWS for India AI/ML job market. Vertex AI pairs with Gemini APIs.</li>
+          </ul>
+        </div>
+        <div class="track">
+          <div class="track-name">Monitoring</div>
+          <ul class="track-items">
+            <li><strong>Evidently AI</strong> <em>— free — docs + YouTube — 1–2 weeks</em></li>
+            <li>Link: <em>evidentlyai.com</em></li>
+            <li>Model drift, data drift. Know how to tell when your AI is going wrong.</li>
+          </ul>
+        </div>
+        <div class="track">
+          <div class="track-name">Parallel Reading</div>
+          <ul class="track-items">
+            <li><strong>Designing ML Systems — Chip Huyen</strong> <em>— book — free chapters online — read 3–4 chapters</em></li>
+            <li>Link: <em>huyenchip.com/book</em></li>
+            <li>Teaches you how to explain your architecture, tradeoffs, scaling decisions in interviews</li>
+          </ul>
+        </div>
+        <div class="outcome"><strong>Outcome:</strong> You can deploy, version, and monitor models in production. This separates you from 90% of AI&DS graduates.</div>
+      </div>
+    </div>
+
+    <!-- Phase 5 -->
+    <div class="phase p5">
+      <div class="phase-header">
+        <div class="phase-num" style="background:var(--phase5);color:#000">PHASE 5</div>
+        <div class="phase-title-block">
+          <div class="phase-title">Flagship Project + Portfolio</div>
+          <div class="phase-meta">Starts Phase 2, completes by Jul 2026 &nbsp;·&nbsp; <span>Ongoing</span></div>
+        </div>
+      </div>
+      <div class="phase-body">
+        <div class="track">
+          <div class="track-name">Mandatory Flagship Project — End-to-End RAG App</div>
+          <ul class="track-items">
+            <li>FastAPI backend</li>
+            <li>Vector DB (FAISS or Pinecone)</li>
+            <li>LLM — API (OpenAI/Gemini) + local Ollama fallback</li>
+            <li>Dockerized and deployable</li>
+            <li>Real use case — pick one: legal docs, medical reports, student Q&A, business FAQ</li>
+          </ul>
+        </div>
+        <div class="track">
+          <div class="track-name">Supporting Portfolio Work</div>
+          <ul class="track-items">
+            <li>Every script, every project → GitHub with clean README</li>
+            <li>LinkedIn: post about what you built, what broke, how you fixed it</li>
+            <li>2–3 smaller projects across different domains (not just one RAG app)</li>
+            <li>Kaggle Learn tracks: ML, Python, SQL — free certificates, credible</li>
+          </ul>
+        </div>
+        <div class="outcome"><strong>Outcome:</strong> Portfolio replaces your college brand. This is what gets you interviews.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Certificates -->
+  <div style="margin-bottom:64px; opacity:0; animation: fadeUp 0.4s ease forwards;">
+    <div class="section-label">// Certificates — what actually matters</div>
+    <div class="cert-grid">
+      <div class="cert-card worth">
+        <span class="cert-tag worth">Pay for it</span>
+        <div class="cert-name">Google Professional ML Engineer</div>
+        <div class="cert-note">After Phase 4. Recognized across India. Worth the cost. cloud.google.com/certification</div>
+      </div>
+      <div class="cert-card worth">
+        <span class="cert-tag worth">Pay for it — or financial aid</span>
+        <div class="cert-name">Andrew Ng ML Specialization — Coursera</div>
+        <div class="cert-note">Most credible ML certificate available. Apply for financial aid — almost always approved, makes it free. coursera.org</div>
+      </div>
+      <div class="cert-card worth">
+        <span class="cert-tag free">Free</span>
+        <div class="cert-name">Harvard CS50 SQL Certificate</div>
+        <div class="cert-note">Harvard certificate, completely free. Highly credible for college and recruiters. cs50.harvard.edu/sql</div>
+      </div>
+      <div class="cert-card worth">
+        <span class="cert-tag free">Free</span>
+        <div class="cert-name">DeepLearning.AI Short Course Certificates</div>
+        <div class="cert-note">Multiple certificates — Prompting, LangChain, PyTorch. Andrew Ng's platform. deeplearning.ai/short-courses</div>
+      </div>
+      <div class="cert-card worth">
+        <span class="cert-tag free">Free</span>
+        <div class="cert-name">Kaggle Certificates — Python, ML, SQL</div>
+        <div class="cert-note">Fast, free, recognized by data teams. Do all three. kaggle.com/learn</div>
+      </div>
+      <div class="cert-card worth">
+        <span class="cert-tag free">Free → Paid exam</span>
+        <div class="cert-name">GCP Associate Cloud Engineer</div>
+        <div class="cert-note">Learn free on cloudskillsboost.google. Pay only for the exam. Strong for India market.</div>
+      </div>
+      <div class="cert-card skip">
+        <span class="cert-tag skip">Show in college only</span>
+        <div class="cert-name">Udemy Certificates — Angela Yu + Docker</div>
+        <div class="cert-note">Low weight with serious recruiters but fine for college records. Learn from the course, use certificate only for college.</div>
+      </div>
+      <div class="cert-card skip">
+        <span class="cert-tag skip">Skip</span>
+        <div class="cert-name">College Fest / Workshop Certs</div>
+        <div class="cert-note">Filler. Takes time away from actual building. Not worth it.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Timeline -->
+  <div class="timeline">
+    <div class="section-label">// Timeline — when to do what</div>
+    <div class="tl-row">
+      <div class="tl-time">Now–May '25</div>
+      <div class="tl-content"><strong><span class="tl-dot"></span>Phase 0</strong>Python intermediate, SQL, Git. Stop being a beginner.</div>
+    </div>
+    <div class="tl-row">
+      <div class="tl-time">Jun–Nov '25</div>
+      <div class="tl-content"><strong><span class="tl-dot" style="background:var(--accent2)"></span>Phase 1 + 2</strong>DSA (6 months) runs parallel with Applied GenAI (3 months). Two tracks simultaneously.</div>
+    </div>
+    <div class="tl-row">
+      <div class="tl-time">Dec '25–Feb '26</div>
+      <div class="tl-content"><strong><span class="tl-dot" style="background:var(--phase3)"></span>Phase 3</strong>ML Theory + PyTorch. Just enough to understand and debug models.</div>
+    </div>
+    <div class="tl-row">
+      <div class="tl-time">Mar–Jun '26</div>
+      <div class="tl-content"><strong><span class="tl-dot" style="background:var(--phase4)"></span>Phase 4</strong>Docker, GCP Vertex AI, monitoring. Make your projects deployable and production-grade.</div>
+    </div>
+    <div class="tl-row">
+      <div class="tl-time">Jul '26 onwards</div>
+      <div class="tl-content"><strong><span class="tl-dot" style="background:var(--phase5)"></span>Phase 5 complete + Job Prep</strong>Flagship project done. Polish GitHub. Start applying. Internships first, then full-time.</div>
+    </div>
+    <div class="tl-row">
+      <div class="tl-time">Late 2027</div>
+      <div class="tl-content"><strong><span class="tl-dot" style="background:#fff"></span>Job-Ready</strong>7th sem = active interview phase. Target ₹12–20 LPA. College placements as backup only.</div>
+    </div>
+  </div>
+
+  <!-- Rules -->
+  <div class="rules">
+    <div class="rules-header">Non-Negotiable Rules</div>
+    <ul class="rules-list">
+      <li><span class="rule-num">01</span>Every single thing you build goes on GitHub. Even Phase 0 practice scripts. Recruiters from tier-2 colleges are filtered by GitHub activity before resume content.</li>
+      <li><span class="rule-num">02</span>LinkedIn presence matters as much as GitHub. Post about what you built, what broke, and how you fixed it. That gets recruiter attention. Polished READMEs alone don't.</li>
+      <li><span class="rule-num">03</span>Do not skip Phase 0. Students always want to jump to the exciting stuff. The Python and SQL gaps will kill you in technical interviews.</li>
+      <li><span class="rule-num">04</span>DSA is not optional. It feels unrelated to AI work. It isn't. It's the filter round. Most AI&DS students skip it and fail screening.</li>
+      <li><span class="rule-num">05</span>College marks are secondary. Minimum passing is fine. Time spent chasing marks beyond that is time stolen from your portfolio.</li>
+      <li><span class="rule-num">06</span>Consistency beats intensity. 12 hours a week every week beats 40 hours one week then nothing. This is a 22-month plan, not a sprint.</li>
+    </ul>
+  </div>
+
+  <!-- Quick Links -->
+  <div style="margin-top:64px; opacity:0; animation: fadeUp 0.4s ease forwards;">
+    <div class="section-label">// Quick Reference — All Links</div>
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--border); border:1px solid var(--border);">
+      <div style="background:var(--surface); padding:16px 20px;">
+        <div style="font-family:'DM Mono',monospace; font-size:10px; color:var(--accent); margin-bottom:8px; text-transform:uppercase;">Phase 0</div>
+        <div style="font-size:12px; color:#aaa; line-height:2;">
+          udemy.com → Angela Yu Python<br>
+          cs50.harvard.edu/sql<br>
+          YouTube → freeCodeCamp Git
+        </div>
+      </div>
+      <div style="background:var(--surface); padding:16px 20px;">
+        <div style="font-family:'DM Mono',monospace; font-size:10px; color:var(--phase1); margin-bottom:8px; text-transform:uppercase;">Phase 1 — DSA</div>
+        <div style="font-size:12px; color:#aaa; line-height:2;">
+          neetcode.io<br>
+          youtube.com/@NeetCode<br>
+          leetcode.com
+        </div>
+      </div>
+      <div style="background:var(--surface); padding:16px 20px;">
+        <div style="font-family:'DM Mono',monospace; font-size:10px; color:var(--phase2); margin-bottom:8px; text-transform:uppercase;">Phase 2 — GenAI</div>
+        <div style="font-size:12px; color:#aaa; line-height:2;">
+          deeplearning.ai/short-courses<br>
+          python.langchain.com<br>
+          docs.llamaindex.ai<br>
+          docs.pinecone.io<br>
+          ollama.com
+        </div>
+      </div>
+      <div style="background:var(--surface); padding:16px 20px;">
+        <div style="font-family:'DM Mono',monospace; font-size:10px; color:var(--phase3); margin-bottom:8px; text-transform:uppercase;">Phase 3 — ML + PyTorch</div>
+        <div style="font-size:12px; color:#aaa; line-height:2;">
+          deeplearning.ai/short-courses<br>
+          coursera.org → Andrew Ng ML
+        </div>
+      </div>
+      <div style="background:var(--surface); padding:16px 20px;">
+        <div style="font-family:'DM Mono',monospace; font-size:10px; color:var(--phase4); margin-bottom:8px; text-transform:uppercase;">Phase 4 — Deployment</div>
+        <div style="font-size:12px; color:#aaa; line-height:2;">
+          udemy.com → Stephen Grider Docker<br>
+          cloudskillsboost.google<br>
+          evidentlyai.com<br>
+          huyenchip.com/book
+        </div>
+      </div>
+      <div style="background:var(--surface); padding:16px 20px;">
+        <div style="font-family:'DM Mono',monospace; font-size:10px; color:var(--phase5); margin-bottom:8px; text-transform:uppercase;">Certificates</div>
+        <div style="font-size:12px; color:#aaa; line-height:2;">
+          kaggle.com/learn<br>
+          cs50.harvard.edu/sql<br>
+          coursera.org (financial aid)<br>
+          cloud.google.com/certification
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <div class="footer-left">Built by Muhammed Dilshad A · AI&DS 2nd Year · Target: Job by 2027</div>
+    <div class="footer-right">Path A + Deployment — AI Application Developer</div>
+  </div>
+
+</div>
+</body>
+</html>
